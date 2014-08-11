@@ -22,8 +22,9 @@ LICENSE
 ### DESCRIPTION
 
 ftpdns is a hack... you need web hosting to: 
-	- host a trivial PHP script 
-	- provide an ftp server account
+
+- host a trivial PHP script 
+- provide an ftp server account
 
 It is pure co-incidence that I operate a suitable UK based hosting service,
 at http://managedwebsitehosting.net
