@@ -19,7 +19,8 @@ LICENSE
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-DESCRIPTION
+### DESCRIPTION
+
 ftpdns is a hack... you need web hosting to: 
 	- host a trivial PHP script 
 	- provide an ftp server account
@@ -39,9 +40,10 @@ On windows I have cygwin Perl installed.
 
 Important thing is its simple, free and works. :-)
 
-INSTALLATION & TESTING
+### INSTALLATION & TESTING
+
 You will need a web hosting service (such as my UK based 
-http://managedwebsitehosting.net <- repeat shameless plug) where you 
+http://managedwebsitehosting.net - repeat shameless plug) where you 
 can a) host a trivial PHP script, and b) create a password protected 
 ftp account where these scripts can upload and access some small 
 text files (one tiny file per remote machine).
@@ -71,23 +73,24 @@ Upload getmyip.php to your web hosting service, accessible
 as http://<webhostdomain>/getmyip.php or similar.
 
 On each remote machine you want to be accessible using this Dynamic DNS:
-	- ftpdnsputip.sh (on Windows you might also want the wrapper ftpdnsputip.bat)
-	- a suitable 'bash' shell (e.g. cygwin on Windows)
-	- wget (e.g. cygwin on Windows)
-	- a cron or Windows Task Scheduler job to run ftpdnsputip.sh automatically (e.g. every 15 minutes)
-	- a standard ftp command line program (e.g. cygwin on Windows, or on Linux run: sudo apt-get install ftp)
-	- commands and scripts need to be somewhere on the path, or if not, you can specify the full path 
-	  whenever you run them (e.g. from command line, cron or Task Scheduler).
+
+- ftpdnsputip.sh (on Windows you might also want the wrapper ftpdnsputip.bat)
+- a suitable 'bash' shell (e.g. cygwin on Windows)
+- wget (e.g. cygwin on Windows)
+- a cron or Windows Task Scheduler job to run ftpdnsputip.sh automatically (e.g. every 15 minutes)
+- a standard ftp command line program (e.g. cygwin on Windows, or on Linux run: sudo apt-get install ftp)
+- commands and scripts need to be somewhere on the path, or if not, you can specify the full path whenever you run them (e.g. from command line, cron or Task Scheduler).
+
 	Note: these tested on Windows 7 and Ubuntu 14.04 LTS
 
 	
 On each machine you want to be able to access the remote machines you need:
-	- ftpdnsmakehosts.pl (on Windows you might also want the wrapper ftpdnsmakehosts.bat)
-	- a suitable Perl interpreter (e.g. cygwin on Windows)
-	- a standard ftp command line program (e.g. cygwin on Windows, 
-	  or on Linux run: sudo apt-get install ftp)
-	- commands and scripts need to be somewhere on the path, or if not, you can specify the full path 
-	  whenever you run them (e.g. from command line, cron or Task Scheduler).
+
+- ftpdnsmakehosts.pl (on Windows you might also want the wrapper ftpdnsmakehosts.bat)
+- a suitable Perl interpreter (e.g. cygwin on Windows)
+- a standard ftp command line program (e.g. cygwin on Windows, or on Linux run: sudo apt-get install ftp)
+- commands and scripts need to be somewhere on the path, or if not, you can specify the full path whenever you run them (e.g. from command line, cron or Task Scheduler).
+
 	Note: these tested only on Windows 7
 
 
@@ -96,11 +99,13 @@ I wrote the bash script. Feel free to convert ftpdnsputip.sh to Perl!
 
 Its fine for a machine to act in both roles at once.
 
-TESTING Using The Command Line
+#### TESTING - Using The Command Line
 
-Testing - on each machine to be accessed via Dynamic DNS:
+##### Testing - on each machine to be accessed via Dynamic DNS:
+
 1) Inserting your web hostname, check that you can manually obtain 
 a "somename.getmyip" file with:
+
 	wget -qO somename.getmyip http://<webhostdomain>/getmyip.php >/dev/null
 
 2) Check the content of the somename.getmyip file looks like a 
@@ -114,7 +119,8 @@ to verify this.
 3) Use command line ftp to verify the machine can login to ftp, and 
 then UPLOAD the "somename.getmyip" file from step 1)
 
-Testing - on each machine that will access other machines via Dynamic DNS:
+##### Testing - on each machine that will access other machines via Dynamic DNS:
+
 4) Use command line ftp to verify the machine can login to ftp, and 
 then DOWNLOAD a previously uploaded "somename.getmyip" file.
 
@@ -123,22 +129,25 @@ then DOWNLOAD a previously uploaded "somename.getmyip" file.
 6) From the directory containing your hosts file (/etc on Linux, 
 C:\Windows\system32\drivers\etc\ on Windows 7), make a backup copy of your
 hosts file. Then manually run ftpdnsmakehosts.pl, for example using:
-	On Windows you will need Administrator permissions
-		c:\cygwin\bin\perl /cygdrive/c/binl/ftpdnsmakehosts.pl
 
-	On Linux you will need to use "sudo" when running manually, or run the
-	script using the root crontab, because it needs to edit the "hosts" file.
+On Windows you will need Administrator permissions
+
+	c:\cygwin\bin\perl /cygdrive/c/binl/ftpdnsmakehosts.pl
+
+On Linux you will need to use "sudo" when running manually, or run the script using the root crontab, because it needs to edit the "hosts" file.
 	
 The above is to verify that it downloads all *.getmyip files stored on the 
 ftp server and inserts an entry for each in the hosts file (while preserving 
 everything else). Repeating the command will just update the inserted 
 section which will look something like this:
 
-##### START DNS HOSTS - DO NOT EDIT
-98.19.245.34  tantalum
-23.87.237.52  bargee
+ ##### START DNS HOSTS - DO NOT EDIT
 
-##### END   DNS HOSTS - DO NOT EDIT
+ 98.19.245.34  tantalum
+
+ 23.87.237.52  bargee
+
+ ##### END   DNS HOSTS - DO NOT EDIT
 
 7) Try "ping tantalum" etc to verify you machine picks this up. On Windows I
 provide a wrapper (ftpdnsmakehosts.bat) that runs the command followed by
