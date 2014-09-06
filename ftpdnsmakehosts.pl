@@ -1,12 +1,25 @@
-#!/bin/perl
+#!/usr/bin/perl
 #
 # ftpdnsmakehosts.pl - download ftpdns files and create a new hosts file
 #
-# Written in perl for portability, but only tested on Windows 7 (with cygwin + cygwin perl).
+# Written in perl for portability, tested on:
+#       - Windows 7 (with cygwin + cygwin perl).
+#       - Linux Mint Debian Edition (Betsy)
+#
+# Windows
+# Script variables have paths set for Windows, but check they are correct for your system.
+# You will also need to ensure the ftp server, username and password are correctly set
 #
 # This script is intended to be called by a Windows batch file containing something like:
-#	c:\cygwin\bin\perl /cygdrive/c/binl/ftpdnsmakehosts.pl
-#	ipconfig /flushdns
+#       c:\cygwin\bin\perl /cygdrive/c/binl/ftpdnsmakehosts.pl
+#       ipconfig /flushdns
+#
+# Linux
+# Script variables have paths set for Windows, so you need to modify these for Linux
+# You will also need to ensure the ftp server, username and password are correctly set
+#
+# Then, to update your /etc/hosts file use:
+#       sudo ./ftpdnsmakehosts.pl
 #
 # NOTES:
 # See also ftpdnsputip.sh which obtains the machine IP address from a web server script,
@@ -16,10 +29,6 @@
 # existing hosts file to include the IP addresses of each machine that uploaded a file.
 # The script ignores any file placed on the FTP server by this host, so only other
 # hosts are listed in the hosts file.
-#
-# History (pre git)
-#  06-08-2014	Initial version.
-#  12-08-2014	Tweaks to accommodate README.TXT documentation.
 #
 # License
 #
